@@ -79,6 +79,110 @@ Authorization: Bearer your_jwt_token_here
     "msg": "Unauthorized"
 }
 ```
+# 3.3.2 Notifications API
+
+### 1. View Notifications
+
+**URL:** `GET /notifications`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "total_notifications": 2,
+    "notifications": [
+        {
+            "id": "60f4a1bd0d1a2b3414b9c7e9",
+            "title": "Garbage Collection Schedule Update",
+            "message": "Garbage collection for Ward 4 is now on Monday and Thursday.",
+            "category": "schedule"
+        },
+        {
+            "id": "60f4a1bd0d1a2b3414b9c7ea",
+            "title": "Recycling Guidelines",
+            "message": "Please follow the new recycling guidelines for plastic waste.",
+            "category": "guidelines"
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Set Notification Preferences
+
+**URL:** `POST /notifications/preferences`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "categories": ["event", "schedule", "guidelines"]
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Notification preferences set successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 3. Add a Notification (Admin Only)
+
+**URL:** `POST /notifications`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "title": "Recycling Event Announcement",
+    "message": "Join us for a recycling event on May 15th.",
+    "category": "event"
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Notification created successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token or Not Admin - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
 
 
 
