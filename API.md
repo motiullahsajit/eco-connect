@@ -491,6 +491,241 @@ Authorization: Bearer your_jwt_token_here
     "msg": "Unauthorized"
 }
 ```
+# 3.3.5 Interactive Maps
+
+### 1. Get Nearby Recycling Facilities
+
+**URL:** `GET /maps/recycling-facilities`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "recycling_facilities": [
+        {
+            "facility_id": "60f4a1bd0d1a2b3414b9c7f3",
+            "name": "Green Recycle Center",
+            "address": "456 Elm St",
+            "coordinates": [90.123456, 23.456789]
+        },
+        {
+            "facility_id": "60f4a1bd0d1a2b3414b9c7f4",
+            "name": "Eco-Friendly Recycling Hub",
+            "address": "789 Maple St",
+            "coordinates": [90.987654, 23.654321]
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Get Nearby Drop-off Points
+
+**URL:** `GET /maps/drop-off-points`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "drop_off_points": [
+        {
+            "point_id": "60f4a1bd0d1a2b3414b9c7f5",
+            "name": "East Drop-off Point",
+            "address": "123 Oak St",
+            "coordinates": [90.765432, 23.876543]
+        },
+        {
+            "point_id": "60f4a1bd0d1a2b3414b9c7f6",
+            "name": "West Drop-off Point",
+            "address": "321 Pine St",
+            "coordinates": [90.543210, 23.987654]
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 3. Get Waste Management Centers
+
+**URL:** `GET /maps/waste-management-centers`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "waste_management_centers": [
+        {
+            "center_id": "60f4a1bd0d1a2b3414b9c7f7",
+            "name": "Main Waste Management Center",
+            "address": "456 Birch St",
+            "coordinates": [90.654321, 23.123456]
+        },
+        {
+            "center_id": "60f4a1bd0d1a2b3414b9c7f8",
+            "name": "South Waste Management Facility",
+            "address": "789 Cedar St",
+            "coordinates": [90.432109, 23.987654]
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+# 3.3.6 Volunteer Opportunities
+
+### 1. Get All Volunteer Events
+
+**URL:** `GET /volunteers/events`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "events": [
+        {
+            "event_id": "60f4a1bd0d1a2b3414b9c7f9",
+            "title": "Cleanup Drive",
+            "description": "A community cleanup drive to improve the neighborhood.",
+            "date": "2024-07-01T09:00:00Z",
+            "location": "Central Park"
+        },
+        {
+            "event_id": "60f4a1bd0d1a2b3414b9c7fa",
+            "title": "Recycling Campaign",
+            "description": "A campaign to promote recycling in the community.",
+            "date": "2024-08-15T10:00:00Z",
+            "location": "City Hall"
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Register for a Volunteer Event
+
+**URL:** `POST /volunteers/events/{event_id}/register`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Successfully registered for the event"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 3. Create a Volunteer Event
+
+**URL:** `POST /volunteers/events`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "title": "Cleanup Drive",
+    "description": "A community cleanup drive to improve the neighborhood.",
+    "date": "2024-07-01T09:00:00Z",
+    "location": "Central Park"
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Volunteer event created successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 4. Delete a Volunteer Event (Admin Only / Creator)
+
+**URL:** `DELETE /volunteers/events/{event_id}`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "message": "Volunteer event deleted successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token or Not Admin - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
 
 
 
