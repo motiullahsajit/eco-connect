@@ -1,6 +1,6 @@
-# Citizen Engagement App API
+# Comprehensive API Documentation
 
-# 3.3.1 Issues
+# 3.3.1 Issue Reporting
 
 ### 1. View Issues by Admin
 
@@ -79,7 +79,8 @@ Authorization: Bearer your_jwt_token_here
     "msg": "Unauthorized"
 }
 ```
-# 3.3.2 Notifications API
+
+# 3.3.2 Notification System
 
 ### 1. View Notifications
 
@@ -208,7 +209,7 @@ Authorization: Bearer your_jwt_token_here
         },
         {
             "post_id": "60f4a1bd0d1a2b3414b9c7ea",
-            "picture_url": false,
+            "picture_url": "https://example.com/another-blog-image.jpg",
             "details": "Another blog post details go here...",
             "tags": ["composting", "environment"],
             "by_admin": false
@@ -370,6 +371,8 @@ Authorization: Bearer your_jwt_token_here
 
 **Example Response (Success - 201 Created):**
 ```
+
+
 {
     "message": "Successfully registered for the event"
 }
@@ -491,6 +494,7 @@ Authorization: Bearer your_jwt_token_here
     "msg": "Unauthorized"
 }
 ```
+
 # 3.3.5 Interactive Maps
 
 ### 1. Get Nearby Recycling Facilities
@@ -734,15 +738,17 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `GET /languages`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
-    "languages": [
+    "
+
+languages": [
         {
             "language_code": "en",
             "name": "English"
@@ -760,7 +766,7 @@ Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -771,27 +777,27 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `PUT /languages/preference`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Request Payload (JSON):**
-```json
+```
 {
     "language_code": "en"
 }
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "message": "Language preference updated successfully"
 }
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -802,13 +808,13 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `GET /accessibility`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "accessibility_settings": {
         "high_contrast_mode": true,
@@ -819,7 +825,7 @@ Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -830,13 +836,13 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `PUT /accessibility`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Request Payload (JSON):**
-```json
+```
 {
     "high_contrast_mode": true,
     "text_to_speech_enabled": false,
@@ -845,18 +851,19 @@ Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "message": "Accessibility settings updated successfully"
 }
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
 ```
+
 # 3.3.8 Privacy and Security
 
 ### 1. Get Privacy Settings
@@ -864,13 +871,13 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `GET /privacy`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "privacy_settings": {
         "profile_visibility": "public",
@@ -880,7 +887,7 @@ Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -891,13 +898,13 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `PUT /privacy`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Request Payload (JSON):**
-```json
+```
 {
     "profile_visibility": "private",
     "activity_visibility": "friends"
@@ -905,14 +912,14 @@ Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "message": "Privacy settings updated successfully"
 }
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -923,27 +930,27 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `POST /friends/request`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Request Payload (JSON):**
-```json
+```
 {
     "friend_id": "60f4a1bd0d1a2b3414b9c7e9"
 }
 ```
 
 **Example Response (Success - 201 Created):**
-```json
+```
 {
     "message": "Friend request sent successfully"
 }
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -954,27 +961,27 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `POST /friends/accept`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Request Payload (JSON):**
-```json
+```
 {
     "friend_id": "60f4a1bd0d1a2b3414b9c7ea"
 }
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "message": "Friend request accepted successfully"
 }
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
@@ -985,29 +992,26 @@ Authorization: Bearer your_jwt_token_here
 **URL:** `DELETE /friends/{friend_id}`
 
 **Request Header:**
-```http
+```
 Content-Type: application/json
 Authorization: Bearer your_jwt_token_here
 ```
 
 **Example Response (Success - 200 OK):**
-```json
+```
 {
     "message": "Friend removed successfully"
 }
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
-```json
+```
 {
     "msg": "Unauthorized"
 }
 ```
 
-
-
-
-
+# Authentication and Profile Management
 
 ### Register Endpoint
 
@@ -1015,7 +1019,6 @@ Authorization: Bearer your_jwt_token_here
 
 **Request Payload (JSON):**
 ```
-Content-Type: application/json
 {
     "username": "john_doe",
     "email": "john@example.com",
@@ -1043,14 +1046,14 @@ Content-Type: application/json
     "message": "Invalid data."
 }
 ```
+### Login and Logout Endpoints
 
-### Login Endpoint
+#### Login
 
 **URL:** `POST /login`
 
 **Request Payload (JSON):**
 ```
-Content-Type: application/json
 {
     "email": "john@example.com",
     "password": "password123"
@@ -1071,6 +1074,29 @@ Content-Type: application/json
 }
 ```
 
+#### Logout
+
+**URL:** `POST /logout`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "message": "User logged out successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
 
 ### Profile
 
@@ -1153,7 +1179,6 @@ Authorization: Bearer your_jwt_token_here
         ]
     }
 }
-
 ```
 
 **Example Response (Invalid or Missing Token - 403 Forbidden):**
@@ -1162,7 +1187,6 @@ Authorization: Bearer your_jwt_token_here
     "msg": "Unauthorized"
 }
 ```
-
 
 **Example Response (User Doesn't Exist - 401 Unauthorized):**
 ```
