@@ -1,5 +1,86 @@
-
 # Citizen Engagement App API
+
+# 3.3.1 Issues
+
+### 1. View Issues by Admin
+
+**URL:** `GET /issues`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+[
+    {
+        "issue_id": "60f4a1bd0d1a2b3414b9c7e9",
+        "type": "overflowing bins",
+        "details": "Trash bin is full and overflowing.",
+        "picture_url": "http://123.com/issue1.png",
+        "is_solved": false,
+        "hide_user": true,
+        "location": "123 Main St",
+        "created_at": "2024-05-10T10:00:00Z"
+    },
+    {
+        "issue_id": "60f4a1bd0d1a2b3414b9c7ea",
+        "type": "littering",
+        "details": "People are throwing garbage on the street.",
+        "picture_url": "http://123.com/issue2.png",
+        "is_solved": true,
+        "hide_user": false,
+        "location": "456 Elm St",
+        "created_at": "2024-05-11T12:00:00Z"
+    }
+]
+```
+
+**Example Response (Invalid or Missing Token or Not Admin - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Create Issue by User
+
+**URL:** `POST /issues`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "type": "overflowing bins",
+    "details": "Trash bin is full and overflowing.",
+    "picture_url": "http://123.com/issue1.png",
+    "location": "123 Main St",
+    "hide_user": true
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Issue created"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+
 
 ### Register Endpoint
 
