@@ -183,6 +183,105 @@ Authorization: Bearer your_jwt_token_here
 }
 ```
 
+### 3.3.3 Community Engagement
+
+#### 1. View Blog
+
+**URL:** `GET /blogs`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "blogs": [
+        {
+            "post_id": "60f4a1bd0d1a2b3414b9c7e9",
+            "picture_url": "https://example.com/blog-image.jpg",
+            "details": "Blog post details go here...",
+            "tags": ["recycling", "waste management"],
+            "by_admin": true
+        },
+        {
+            "post_id": "60f4a1bd0d1a2b3414b9c7ea",
+            "picture_url": false,
+            "details": "Another blog post details go here...",
+            "tags": ["composting", "environment"],
+            "by_admin": false
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+#### 2. Create a Post
+
+**URL:** `POST /blogs`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "picture_url": "https://example.com/blog-image.jpg",
+    "details": "Blog post details go here...",
+    "tags": ["recycling", "waste management"]
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Blog post created successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+#### 3. Delete Post (Admin Only)
+
+**URL:** `DELETE /blogs/{post_id}`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "message": "Blog post deleted successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token or Not Admin - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+
 
 
 
