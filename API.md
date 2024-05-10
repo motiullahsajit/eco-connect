@@ -727,6 +727,283 @@ Authorization: Bearer your_jwt_token_here
 }
 ```
 
+# 3.3.7 Accessibility and Multilingual Support
+
+### 1. Get Supported Languages
+
+**URL:** `GET /languages`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "languages": [
+        {
+            "language_code": "en",
+            "name": "English"
+        },
+        {
+            "language_code": "bn",
+            "name": "Bengali"
+        },
+        {
+            "language_code": "es",
+            "name": "Spanish"
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Set User Language Preference
+
+**URL:** `PUT /languages/preference`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```json
+{
+    "language_code": "en"
+}
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "message": "Language preference updated successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 3. Get Accessibility Settings
+
+**URL:** `GET /accessibility`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "accessibility_settings": {
+        "high_contrast_mode": true,
+        "text_to_speech_enabled": false,
+        "font_size": "large"
+    }
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 4. Update Accessibility Settings
+
+**URL:** `PUT /accessibility`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```json
+{
+    "high_contrast_mode": true,
+    "text_to_speech_enabled": false,
+    "font_size": "large"
+}
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "message": "Accessibility settings updated successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+# 3.3.8 Privacy and Security
+
+### 1. Get Privacy Settings
+
+**URL:** `GET /privacy`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "privacy_settings": {
+        "profile_visibility": "public",
+        "activity_visibility": "friends"
+    }
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Update Privacy Settings
+
+**URL:** `PUT /privacy`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```json
+{
+    "profile_visibility": "private",
+    "activity_visibility": "friends"
+}
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "message": "Privacy settings updated successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+# Adding Friend APIs
+
+### 3. Send Friend Request
+
+**URL:** `POST /friends/request`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```json
+{
+    "friend_id": "60f4a1bd0d1a2b3414b9c7e9"
+}
+```
+
+**Example Response (Success - 201 Created):**
+```json
+{
+    "message": "Friend request sent successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 4. Accept Friend Request
+
+**URL:** `POST /friends/accept`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```json
+{
+    "friend_id": "60f4a1bd0d1a2b3414b9c7ea"
+}
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "message": "Friend request accepted successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 5. Remove Friend
+
+**URL:** `DELETE /friends/{friend_id}`
+
+**Request Header:**
+```http
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```json
+{
+    "message": "Friend removed successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```json
+{
+    "msg": "Unauthorized"
+}
+```
 
 
 
