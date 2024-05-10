@@ -917,7 +917,6 @@ Authorization: Bearer your_jwt_token_here
     "msg": "Unauthorized"
 }
 ```
-# Adding Friend APIs
 
 ### 3. Send Friend Request
 
