@@ -183,9 +183,9 @@ Authorization: Bearer your_jwt_token_here
 }
 ```
 
-### 3.3.3 Community Engagement
+# 3.3.3 Community Engagement
 
-#### 1. View Blog
+### 1. View Blog
 
 **URL:** `GET /blogs`
 
@@ -224,7 +224,7 @@ Authorization: Bearer your_jwt_token_here
 }
 ```
 
-#### 2. Create a Post
+### 2. Create a Post
 
 **URL:** `POST /blogs`
 
@@ -257,7 +257,7 @@ Authorization: Bearer your_jwt_token_here
 }
 ```
 
-#### 3. Delete Post (Admin Only)
+### 3. Delete Post (Admin Only)
 
 **URL:** `DELETE /blogs/{post_id}`
 
