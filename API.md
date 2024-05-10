@@ -281,6 +281,219 @@ Authorization: Bearer your_jwt_token_here
 }
 ```
 
+# 3.3.4 Social Sharing and Educational Content
+
+### 1. Get All Events
+
+**URL:** `GET /events`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "events": [
+        {
+            "event_id": "60f4a1bd0d1a2b3414b9c7ef",
+            "title": "Waste Management Seminar",
+            "description": "An informative seminar on waste management practices.",
+            "date": "2024-05-20T10:00:00Z",
+            "location": "City Hall",
+            "by_admin": true
+        },
+        {
+            "event_id": "60f4a1bd0d1a2b3414b9c7f0",
+            "title": "Recycling Workshop",
+            "description": "A hands-on workshop about recycling techniques.",
+            "date": "2024-06-15T14:00:00Z",
+            "location": "Community Center",
+            "by_admin": false
+        }
+    ]
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 2. Create an Event
+
+**URL:** `POST /events`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "title": "Waste Management Seminar",
+    "description": "An informative seminar on waste management practices.",
+    "date": "2024-05-20T10:00:00Z",
+    "location": "City Hall"
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Event created successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 3. Register for an Event
+
+**URL:** `POST /events/{event_id}/register`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Successfully registered for the event"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 4. Delete an Event (Admin Only)
+
+**URL:** `DELETE /events/{event_id}`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "message": "Event deleted successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token or Not Admin - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 5. Create a Quiz
+
+**URL:** `POST /quizzes`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "title": "Waste Management Quiz",
+    "description": "Test your knowledge on waste management.",
+    "questions": [
+        {
+            "question_text": "Which item is recyclable?",
+            "options": ["Plastic bottle", "Ceramic plate", "Metal can", "All of the above"],
+            "correct_answer": 3
+        },
+        {
+            "question_text": "What is composting?",
+            "options": ["Burning waste", "Turning organic waste into fertilizer", "Recycling metal", "All of the above"],
+            "correct_answer": 1
+        }
+    ]
+}
+```
+
+**Example Response (Success - 201 Created):**
+```
+{
+    "message": "Quiz created successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+### 6. Submit Answers for a Quiz
+
+**URL:** `POST /quizzes/{quiz_id}/submit`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Request Payload (JSON):**
+```
+{
+    "answers": [
+        {
+            "question_id": "60f4a1bd0d1a2b3414b9c7f1",
+            "selected_option": 3
+        },
+        {
+            "question_id": "60f4a1bd0d1a2b3414b9c7f2",
+            "selected_option": 1
+        }
+    ]
+}
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "score": 2,
+    "total": 2,
+    "message": "Quiz submitted successfully"
+}
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+
+
 
 
 
