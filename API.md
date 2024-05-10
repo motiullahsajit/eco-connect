@@ -7,6 +7,7 @@
 
 **Request Payload (JSON):**
 ```
+Content-Type: application/json
 {
     "username": "john_doe",
     "email": "john@example.com",
@@ -41,6 +42,7 @@
 
 **Request Payload (JSON):**
 ```
+Content-Type: application/json
 {
     "email": "john@example.com",
     "password": "password123"
