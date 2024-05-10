@@ -76,7 +76,7 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="map"
+          name="points"
           options={{
             title: "Points",
             headerShown: false,
