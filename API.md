@@ -63,6 +63,99 @@ Content-Type: application/json
 }
 ```
 
+
+### Profile
+
+**URL:** `GET /profile`
+
+**Request Header:**
+```
+Content-Type: application/json
+Authorization: Bearer your_jwt_token_here
+```
+
+**Example Response (Success - 200 OK):**
+```
+{
+    "username": "john_doe",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "is_admin": false,
+    "issue_reporting": {
+        "reported_issues": [
+            {
+                "id": "60f4a1bd0d1a2b3414b9c7e9",
+                "location": "123 Main St",
+                "issue_type": "Overflowing Bin",
+                "description": "Trash bin is full and overflowing.",
+                "status": "pending"
+            }
+        ],
+        "anonymous_reporting_enabled": true
+    },
+    "notification_system": {
+        "subscribed_categories": [
+            "schedule",
+            "events",
+            "guidelines"
+        ]
+    },
+    "community_engagement": {
+        "forum_posts": [
+            {
+                "id": "60f4a1bd0d1a2b3414b9c7ea",
+                "title": "Recycling Tips",
+                "content": "Always rinse your recyclable containers."
+            }
+        ]
+    },
+    "social_sharing_and_educational_content": {
+        "shared_content": [
+            {
+                "id": "60f4a1bd0d1a2b3414b9c7eb",
+                "title": "Waste Management Event",
+                "type": "event",
+                "url": "https://example.com/event"
+            }
+        ],
+        "educational_resources": [
+            {
+                "id": "60f4a1bd0d1a2b3414b9c7ec",
+                "title": "Composting Techniques",
+                "type": "article",
+                "url": "https://example.com/composting"
+            }
+        ]
+    },
+    "interactive_maps": {
+        "nearby_recycling_facilities": [
+            {
+                "id": "60f4a1bd0d1a2b3414b9c7ed",
+                "name": "Green Recycle Center",
+                "location": "456 Elm St"
+            }
+        ]
+    },
+    "volunteer_opportunities": {
+        "volunteered_events": [
+            {
+                "id": "60f4a1bd0d1a2b3414b9c7ee",
+                "event": "Cleanup Drive"
+            }
+        ]
+    }
+}
+
+```
+
+**Example Response (Invalid or Missing Token - 403 Forbidden):**
+```
+{
+    "msg": "Unauthorized"
+}
+```
+
+
 **Example Response (User Doesn't Exist - 401 Unauthorized):**
 ```
 {
