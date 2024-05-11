@@ -1,41 +1,34 @@
 import React, { useState } from "react";
 import { router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 import {
+  SafeAreaView,
+  ScrollView,
   View,
   Text,
   Image,
-  FlatList,
   TouchableOpacity,
   Modal,
   TextInput,
   Alert,
-  ScrollView,
 } from "react-native";
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import { icons } from "../../constants";
-import useAppwrite from "../../lib/useAppwrite";
-import { getUserPosts, signOut } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { InfoBox } from "../../components";
 
 const imgbbKey = "a9e96cffb01065e5efdb260580e31b2a";
 
 const Profile = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
-
+  const { user, setUser, logout } = useGlobalContext();
   const [isModalVisible, setModalVisible] = useState(false);
   const [newName, setNewName] = useState(user?.name || "");
   const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber || "");
-  const [newAvatar, setNewAvatar] = useState(user?.avatar || "");
+  const [newPhotoUrl, setNewPhotoUrl] = useState(
+    user?.photoUrl || "https://via.placeholder.com/150"
+  );
 
-  const logout = async () => {
-    // await signOut();
-    setUser(null);
-    setIsLogged(false);
-
+  const handleLogout = async () => {
+    await logout();
     router.replace("/sign-in");
   };
 
@@ -54,7 +47,6 @@ const Profile = () => {
 
   const uploadImageToImgbb = async (uri) => {
     const imgData = new FormData();
-    const url = `https://api.imgbb.com/1/upload?key=${imgbbKey}`;
     imgData.append("image", {
       uri,
       type: "image/jpeg",
@@ -62,65 +54,90 @@ const Profile = () => {
     });
 
     try {
-      const imgUploadResponse = await axios.post(url, imgData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      const imgUrl = imgUploadResponse.data.data.url;
-      setNewAvatar(imgUrl);
+      const response = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${imgbbKey}`,
+        imgData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      if (response.data && response.data.data && response.data.data.url) {
+        setNewPhotoUrl(response.data.data.url);
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
       Alert.alert("Error", "Image upload failed. Please try again.");
     }
   };
 
-  const handleUpdateProfile = () => {
+  const handleUpdateProfile = async () => {
     if (!newName || !newPhoneNumber) {
       Alert.alert("Error", "Please fill in all required fields.");
       return;
     }
 
-    const updatedUser = {
-      ...user,
-      name: newName,
-      phoneNumber: newPhoneNumber,
-      avatar: newAvatar,
-    };
+    try {
+      // const response = await axios.put(
+      //   "http://192.168.137.148:8080/profile",
+      //   {
+      //     name: newName,
+      //     phoneNumber: newPhoneNumber,
+      //     photoUrl: newPhotoUrl,
+      //   },
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${user?.token}`,
+      //     },
+      //   }
+      // );
 
-    setUser(updatedUser);
-    setModalVisible(false);
+      // if (response.status === 200) {
+      setUser({
+        ...user,
+        name: newName,
+        phoneNumber: newPhoneNumber,
+        photoUrl: newPhotoUrl,
+      });
+      Alert.alert("Success", "Profile updated successfully.");
+      setModalVisible(false);
+      // } else {
+      //   throw new Error(response.data.message || "Failed to update profile.");
+      // }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      Alert.alert(
+        "Error",
+        error.response?.data?.message ||
+          "An error occurred during profile update."
+      );
+    }
   };
 
   const renderHeader = () => (
     <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
-      <TouchableOpacity onPress={logout} className="w-full items-end mb-6">
+      <TouchableOpacity
+        onPress={handleLogout}
+        className="w-full items-end mb-6"
+      >
         <Image source={icons.logout} resizeMode="contain" className="w-6 h-6" />
       </TouchableOpacity>
 
       <TouchableOpacity
-        className="w-24 h-24 border-4 border-primary rounded-full flex justify-center items-center mb-4"
+        className="w-24 h-24 border-4 border-primary rounded-full flex justify-center items-center mb-2"
         onPress={() => setModalVisible(true)}
       >
         <Image
-          source={{ uri: newAvatar }}
+          source={{ uri: newPhotoUrl }}
           className="w-full h-full rounded-full"
           resizeMode="cover"
         />
       </TouchableOpacity>
 
-      <Text className="text-2xl font-bold text-primary">{newName}</Text>
+      <Text className="text-2xl font-bold text-gray-500">{user?.name}</Text>
       <Text className="text-lg text-gray-500">{user?.username}</Text>
       <Text className="text-lg text-gray-500">{user?.email}</Text>
-      <Text className="text-lg text-gray-500">{newPhoneNumber}</Text>
-
-      <View className="mt-5 flex flex-row justify-center items-center">
-        <InfoBox
-          title={posts.length || 0}
-          subtitle="Reports/Posts"
-          titleStyles="text-xl"
-          containerStyles="mr-10"
-        />
-        <InfoBox title="1.2k" subtitle="Reports" titleStyles="text-xl" />
-      </View>
+      <Text className="text-lg text-gray-500">{user?.phoneNumber}</Text>
     </View>
   );
 
@@ -159,14 +176,14 @@ const Profile = () => {
               onPress={pickImage}
             >
               <Text className="text-center text-white">
-                {newAvatar
+                {newPhotoUrl !== "https://via.placeholder.com/150"
                   ? "Change Profile Picture"
                   : "Upload Profile Picture"}
               </Text>
             </TouchableOpacity>
-            {newAvatar && (
+            {newPhotoUrl && (
               <Image
-                source={{ uri: newAvatar }}
+                source={{ uri: newPhotoUrl }}
                 className="w-24 h-24 rounded-lg mb-4 self-center"
                 resizeMode="cover"
               />

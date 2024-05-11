@@ -15,7 +15,8 @@ const initialThreads = [
     id: "1",
     title: "Successful Waste Management Stories",
     tags: ["Success", "Waste Management"],
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKr_wYt6R7Qd28Cj49YTmz0FvvnNZXLwEm3AMQHrXbfg&s",
     body: "Share your stories about successful waste management practices.",
     posts: [
       {
@@ -34,7 +35,8 @@ const initialThreads = [
     id: "2",
     title: "Tips for Effective Recycling",
     tags: ["Recycling", "Tips"],
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_aupCX7vL3oUvKL2e6NEDL5rPk7djcVZ4RZi2m4VUHg&s",
     body: "Discuss and share effective recycling tips.",
     posts: [
       { id: "p3", author: "Charlie", content: "Separate plastics and metals." },

@@ -15,7 +15,7 @@ const initialEvents = [
     id: "1",
     title: "Community Clean-Up Drive",
     description: "Join us for a clean-up drive to beautify the community.",
-    image: "https://via.placeholder.com/400x300",
+    image: "https://i.ytimg.com/vi/1d-IQGcD6yg/maxresdefault.jpg",
     date: "25th May 2024",
     location: "Main Street Park",
   },
@@ -24,7 +24,8 @@ const initialEvents = [
     title: "Recycling Campaign",
     description:
       "Participate in our recycling campaign and promote eco-friendly practices.",
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiEfMK8MOta_KFHds7wD93eV6pyCkdRtkdC0yrMwNgfA&s",
     date: "10th June 2024",
     location: "Central Park",
   },
@@ -33,7 +34,8 @@ const initialEvents = [
     title: "Waste Management Awareness Workshop",
     description:
       "Attend this workshop to learn about waste management practices.",
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://cdn.cseindia.org/large/2021-08-09/0.75503400_1628496890_solid-wastebanners.jpg",
     date: "20th June 2024",
     location: "Eco Hub Auditorium",
   },
@@ -75,9 +77,6 @@ const VolunteerHub = () => {
     <SafeAreaView className="bg-primary h-full p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex items-center mb-6">
-          <Text className="text-3xl font-bold text-white mb-2">
-            Volunteer Hub
-          </Text>
           <Text className="text-md text-gray-100">
             Upcoming Waste Management Events
           </Text>

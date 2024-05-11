@@ -7,7 +7,8 @@ const initialArticles = [
     id: "1",
     title: "Composting Techniques",
     description: "Learn how to compost at home with simple techniques.",
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://cdn10.bigcommerce.com/s-qq5l39dqy4/product_images/uploaded_images/digging-compost.jpg",
     type: "Article",
     content: "Composting is a great way to reduce waste...",
   },
@@ -15,7 +16,8 @@ const initialArticles = [
     id: "2",
     title: "Recycling Guidelines",
     description: "Understand and follow effective recycling guidelines.",
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwyQcFuDzsBJgnUSvK3ziwhI7X0ql6szKDevkHzR08Kw&s",
     type: "Infographic",
     content: "Recycling involves separating waste materials...",
   },
@@ -23,17 +25,10 @@ const initialArticles = [
     id: "3",
     title: "Waste Management Practices",
     description: "Best practices for effective waste management.",
-    image: "https://via.placeholder.com/400x300",
+    image:
+      "https://wp-website.safetyculture.com/wp-content/uploads/sites/3/2023/12/Waste-Management-Life-Cycle.png",
     type: "Video",
     content: "Watch this video to learn about waste management...",
-  },
-  {
-    id: "4",
-    title: "Quizzes on Waste Management",
-    description: "Test your knowledge with our waste management quiz.",
-    image: "https://via.placeholder.com/400x300",
-    type: "Quiz",
-    content: "Take this quiz to assess your knowledge on waste management...",
   },
 ];
 
@@ -41,8 +36,6 @@ const EcoHub = () => {
   const [articles] = useState(initialArticles);
 
   const handleShare = (title, content) => {
-    // Logic for sharing content (e.g., using Expo Sharing API)
-    // Placeholder function
     alert(`Sharing: ${title}\n\n${content}`);
   };
 

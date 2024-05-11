@@ -19,7 +19,7 @@ const initialReports = [
     id: "1",
     type: "Overflowing Bin",
     details: "The bin at the main street is overflowing.",
-    image: "https://via.placeholder.com/150",
+    image: "https://media.sciencephoto.com/e8/00/04/41/e8000441-800px-wm.jpg",
     location: "Main Street",
     anonymous: false,
   },
@@ -27,7 +27,8 @@ const initialReports = [
     id: "2",
     type: "Littering",
     details: "Littering near the central park.",
-    image: "https://via.placeholder.com/150",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw7MQrue9v92cvpDQUtCqUVLAETrj1wqGR8CAITZjGtw&s",
     location: "Central Park",
     anonymous: true,
   },
@@ -93,9 +94,6 @@ const Report = () => {
       location: location,
       anonymous: isAnonymous,
     };
-
-    // console.log("new", newReport);
-    // add a loader for image upload
 
     setReports([...reports, newReport]);
     resetForm();
