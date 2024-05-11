@@ -2,9 +2,7 @@ import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
-
-import { images } from "../../constants";
-import { createUser } from "../../lib/appwrite";
+import * as SecureStore from "expo-secure-store";
 import { CustomButton, FormField } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
@@ -21,17 +19,37 @@ const SignUp = () => {
   const submit = async () => {
     if (form.username === "" || form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      return;
     }
 
     setSubmitting(true);
-    try {
-      const result = await createUser(form.email, form.password, form.username);
-      setUser(result);
-      setIsLogged(true);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      }),
+    };
 
-      router.replace("/home");
+    try {
+      const response = await fetch(
+        "http://192.168.137.148:8080/register",
+        requestOptions
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        setUser(data);
+        setIsLogged(true);
+        await SecureStore.setItemAsync("userData", JSON.stringify(data));
+        router.replace("/home");
+      } else {
+        throw new Error(data.message || "An error occurred while registering.");
+      }
     } catch (error) {
-      Alert.alert("Error", error.message);
+      Alert.alert("Registration Failed", error.message);
     } finally {
       setSubmitting(false);
     }

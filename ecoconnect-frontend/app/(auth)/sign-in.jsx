@@ -1,11 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Alert,
+  Dimensions,
+} from "react-native";
+import axios from "axios";
 
-import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
-import { getCurrentUser, signIn } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
@@ -19,24 +24,37 @@ const SignIn = () => {
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      return;
     }
 
     setSubmitting(true);
 
     try {
-      // await signIn(form.email, form.password);
-      // const result = await getCurrentUser();
-      setUser({
-        id: "3432",
-        email: "test@example.com",
-        username: "sajit",
+      const response = await axios.post("http://192.168.137.148:8080/login", {
+        email: form.email,
+        password: form.password,
       });
-      setIsLogged(true);
 
-      Alert.alert("Success", "User signed in successfully");
-      router.replace("/home");
+      if (response.data) {
+        setUser(response.data);
+        setIsLogged(true);
+
+        Alert.alert("Success", "User signed in successfully");
+        router.replace("/home");
+      } else {
+        throw new Error("Failed to sign in");
+      }
     } catch (error) {
-      Alert.alert("Error", error.message);
+      console.error(
+        "Login error:",
+        error.response ? error.response.data : error.message
+      );
+      Alert.alert(
+        "Error",
+        error.response
+          ? error.response.data.message
+          : "An error occurred during login."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -58,7 +76,7 @@ const SignIn = () => {
           <FormField
             title="Email"
             value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            handleChangeText={(email) => setForm({ ...form, email })}
             otherStyles="mt-7"
             keyboardType="email-address"
           />
@@ -66,7 +84,7 @@ const SignIn = () => {
           <FormField
             title="Password"
             value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
+            handleChangeText={(password) => setForm({ ...form, password })}
             otherStyles="mt-7"
           />
 
